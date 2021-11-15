@@ -64,7 +64,7 @@ var app = new Vue (
                         },
                         {
                             date: ' 28/03/2020 1 6:15:22',
-                            text: ' Ah s cusa!',
+                            text: ' Ah scusa!',
                             status: ' received'
                         }
                     ],
@@ -81,7 +81,7 @@ var app = new Vue (
                         },
                         {
                             date: ' 10/01/2020 1 5:50:00',
-                            text: ' Si, ma p referirei andare a l cinema',
+                            text: ' Si, ma preferirei andare a l cinema',
                             status: ' received'
                         },
                     ],

@@ -14,7 +14,7 @@
         <div id="container">
            <aside>
                <div id="user">
-                   <div class="contact">
+                   <div class="user-contact">
                        <div class="image">
                            <img src="img/avatar_1.jpg" alt="">
                         </div>
@@ -43,23 +43,70 @@
                </div>
 
                <div id="chats">
-                   <div class="contact" v-for="contact, i in contacts"  :key="i">
+                   <div class="contact-chat" v-for="contact, i in contacts"  :key="i">
                        <div class="description-contact">
                            <div class="image">
-                              <img src="contact.avatar" alt="">
+                              <img :src="contact.avatar" alt="">
                            </div>
                            <div>
                                <h3>{{contact.name}}</h3>
-                               <p>mesaggio .....</p>
+                               <p>{{contact.messages[contact.messages.length - 1].text}}</p>
                            </div>
                        </div>
                         <div>
-                            <!-- {{contact.messages.[messages.Length -1].date}} -->
+                            {{contact.messages[contact.messages.length - 1].date}}
                         </div>
                    </div>
                </div>
            </aside>
-           <main></main>
+
+           <main>
+               <div class="header">
+                    <div class="contact-text" >
+                        <div class="image">
+                            <img src="img/avatar_1.jpg" alt="">
+                        </div>
+                        <div>
+                            <h3>{{contacts[0].name}}</h3>
+                            <p>Ultimo accesso oggi alle {{contacts[0].messages[2].date}}</p>
+                        </div>
+                    </div>
+
+                    <div class="icons-user icons-text">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+
+               <div class="chat">
+                   <div class="meggage-chat send">
+                        {{contacts[0].messages[0].text}}
+                        <p>
+                            {{contacts[0].messages[0].date}}
+                        </p>
+                   </div>
+                   <div class="meggage-chat send">
+                        {{contacts[0].messages[1].text}}
+                        <p>
+                            {{contacts[0].messages[1].date}}
+                        </p>
+                   </div>
+                   <div class="meggage-chat recived">
+                        {{contacts[0].messages[2].text}}
+                        <p>
+                            {{contacts[0].messages[2].date}}
+                        </p>
+                   </div>
+               </div>
+
+
+               <div class="write">
+                    <i class="far fa-smile"></i>
+                    <input type="text" placeholder="Scivi un messaggio">
+                    <i class="fas fa-microphone"></i>
+               </div>
+           </main>
         </div>
     </div>
 
