@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="back">
+        <div id="back-up"></div>
+        <div id="container">
+           <aside>
+               <div id="user">
+                   <div class="contact">
+                       <div class="image">
+                           <img src="img/avatar_1.jpg" alt="">
+                        </div>
+                        <span>Nome Utente</span>
+                   </div>
+                   <div class="icons-user">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                   </div>
+               </div>
+
+               <div id="notifications-desktop">
+                   <div class="bell">
+                       <i class="fas fa-bell-slash"></i>
+                   </div>
+                   <div>
+                       <h3>Ricevi notifiche di nuovi messaggi</h3>
+                        <p>Attiva notifiche</p>
+                    </div>
+               </div>
+
+               <div id="search">
+                   <span><i class="fas fa-search"></i></span>
+                   <input type="text" placeholder="Cerca o inizia una nuoca chat">
+               </div>
+
+               <div id="chats">
+                   <div class="contact" v-for="contact, i in contacts"  :key="i">
+                       <div class="description-contact">
+                           <div class="image">
+                              <img src="contact.avatar" alt="">
+                           </div>
+                           <div>
+                               <h3>{{contact.name}}</h3>
+                               <p>mesaggio .....</p>
+                           </div>
+                       </div>
+                        <div>
+                            <!-- {{contact.messages.[messages.Length -1].date}} -->
+                        </div>
+                   </div>
+               </div>
+           </aside>
+           <main></main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="js/myscript.js"></script>
+</body>
+</html>
