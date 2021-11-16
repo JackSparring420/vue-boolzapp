@@ -19,6 +19,12 @@
 
 
 // Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’ utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
+// 1. creo un oggetto che mi va a rappresentare il nuovo messaggio
+// 2. inserisco nell'html i collegamenti della funzione al click invio (keyup.enter) e mi prelevo il valore inserito con v-model
+// 3. nella funzione addMessage pusho NewMessage
+let now = new Date().toUTCString();
+console.log(now);
+// dayjs.extend(dayjs_plugin_customParseFormat);
 
 var app = new Vue (
     {
@@ -27,9 +33,10 @@ var app = new Vue (
             newMessage: {
                 date: "now",
                 text: "",
-                status: "sent"
+                status: "sent",
+                search: ""
             },
-            auto: {
+            reply: {
                 date: "now",
                 text: "ok",
                 status: "received"
@@ -125,18 +132,24 @@ var app = new Vue (
        
         methods: {
             changeChat(index){
-                if(this.contacts[0].visible === true){
-                    this.contacts[0].visible = false
-                };
-                if(this.contacts[1].visible === true){
-                    this.contacts[1].visible = false
-                };
-                if(this.contacts[2].visible === true){
-                    this.contacts[2].visible = false
-                };
-                if(this.contacts[3].visible === true){
-                    this.contacts[3].visible = false
-                };
+                this.contacts.forEach((contact) => {
+                    if(contact.visible === true){
+                        this.contact.visible = false
+                    };
+                });
+
+                // if(this.contacts[0].visible === true){
+                //     this.contacts[0].visible = false
+                // };
+                // if(this.contacts[1].visible === true){
+                //     this.contacts[1].visible = false
+                // };
+                // if(this.contacts[2].visible === true){
+                //     this.contacts[2].visible = false
+                // };
+                // if(this.contacts[3].visible === true){
+                //     this.contacts[3].visible = false
+                // };
 
                 if (this.contacts[index].visible !== true){
                     this.contacts[index].visible = true
@@ -150,20 +163,20 @@ var app = new Vue (
             addMessage(index){
                 if(this.newMessage.text !== ""){
                    this.contacts[index].messages.push(this.newMessage);
-                        this.newMessage = {
-                            date: "now",
-                            text: "",
-                            status: 'sent'
-                        }; 
-                    };
-                // setTimeout(reply, 1000);
-                // function reply(){
-                //     this.contacts[index].messages.push(this.auto);
-                // }
+                   this.newMessage = {
+                       date: "",
+                       text: "",
+                       status: 'sent'
+                    }; 
+                };
+
+                setTimeout(()=> this.contacts[index].messages.push(this.reply),1000);
+                
             },
 
-            reply(index){
-                this.contacts[index].messages.push(this.auto);
+            cerca(){
+                
+            
             }
         }
     }
