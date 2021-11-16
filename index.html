@@ -39,7 +39,7 @@
 
                <div id="search">
                    <span><i class="fas fa-search"></i></span>
-                   <input type="text" placeholder="Cerca o inizia una nuoca chat">
+                   <input type="text" @keyup="cerca" placeholder="Cerca o inizia una nuoca chat">
                </div>
 
                <div id="chats">
@@ -94,13 +94,14 @@
 
                <div class="write">
                     <i class="far fa-smile"></i>
-                    <input type="text"  v-model="newMessage.text" @keyup.enter="addMessage(activeChat), reply(activeChat)" placeholder="Scivi un messaggio">
+                    <input type="text"  v-model="newMessage.text" @keyup.enter="addMessage(activeChat)" placeholder="Scivi un messaggio">
                     <i class="fas fa-microphone"></i>
                </div>
            </main>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/plugin/customParseFormat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="js/myscript.js"></script>
 </body>
