@@ -168,10 +168,14 @@ main {
     justify-content: space-between;
     align-items: center;
 }
-.contact-text {
+.contact-text-container {
+    display: none;
+}
+
+.contact-text{
     display: flex;
     align-items: center;
-    
+    height: 80px;
 }
 
 .icons-text {
@@ -185,7 +189,7 @@ main {
     height: calc(100% - 160px);
     background-image: url(../img/trasferimento.jpg);
     background-size: contain;
-    /* background-repeat: no-repeat; */
+    display: none;
 }
 
 .write {
@@ -217,7 +221,7 @@ main {
     margin: 30px;
 }
 
-.send {
+.sent {
     background-color: #dcf7c0;
     position: relative;
     left: 550px;
@@ -232,3 +236,7 @@ main {
     margin-top: 3px;
     text-align: end;
 }
+
+.done {
+    display: block;
+ }

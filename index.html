@@ -43,7 +43,7 @@
                </div>
 
                <div id="chats">
-                   <div class="contact-chat" v-for="contact, i in contacts"  :key="i">
+                   <div @click="changeChat(i)" class="contact-chat" v-for="contact, i in contacts"  :key="i">
                        <div class="description-contact">
                            <div class="image">
                               <img :src="contact.avatar" alt="">
@@ -62,13 +62,15 @@
 
            <main>
                <div class="header">
-                    <div class="contact-text" >
-                        <div class="image">
-                            <img src="img/avatar_1.jpg" alt="">
-                        </div>
-                        <div>
-                            <h3>{{contacts[0].name}}</h3>
-                            <p>Ultimo accesso oggi alle {{contacts[0].messages[2].date}}</p>
+                    <div class="contact-text-container" v-for="contact, i in contacts"  :key="i" :class="contact.visible === true ? 'done' : '' ">
+                        <div class="contact-text">
+                            <div class="image">
+                                <img :src="contact.avatar" alt="">
+                            </div>
+                            <div>
+                                <h3>{{contact.name}}</h3>
+                                <p>Ultimo accesso oggi alle {{contact.messages[contact.messages.length - 1].date}}</p>
+                            </div>
                         </div>
                     </div>
 
@@ -79,24 +81,14 @@
                     </div>
                 </div>
 
-               <div class="chat">
-                   <div class="meggage-chat send">
-                        {{contacts[0].messages[0].text}}
-                        <p>
-                            {{contacts[0].messages[0].date}}
-                        </p>
-                   </div>
-                   <div class="meggage-chat send">
-                        {{contacts[0].messages[1].text}}
-                        <p>
-                            {{contacts[0].messages[1].date}}
-                        </p>
-                   </div>
-                   <div class="meggage-chat recived">
-                        {{contacts[0].messages[2].text}}
-                        <p>
-                            {{contacts[0].messages[2].date}}
-                        </p>
+               <div class="chat" :class="contacts[activeChat].visible === true ? 'done' : '' ">
+                   <div>
+                       <div v-for="message,i in contacts[activeChat].messages" :key="i"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' " >
+                            {{message.text}}
+                            <p>
+                                {{message.date}}
+                            </p>
+                       </div>
                    </div>
                </div>
 
