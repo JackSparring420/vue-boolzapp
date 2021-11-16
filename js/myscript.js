@@ -1,3 +1,18 @@
+// Visualizzazione dinamica della l ista contatti: tramite la direttiva v-for, visualizzare nome e i mmagine di ogni contatto
+// 1. creo l'istanza di vue compilata con l'array di oggetti formitomi
+// 2. creo un ciclo for per stampare le foto e i nomi delle chats
+// 3. per stampare anche l'ultimo messaggio e l'ultima data do come posizione nel path la lunghezza dell'array-1
+
+// Visualizzazione dinamica dei messaggi: tramite la direttiva v-for, visualizzare tutti imessaggi relativi al contatto attivo all’interno del pannello della conversazione
+// 1. creo un ciclo for per stampare ogni singolo messaggio al click
+// 2. creo la funzione del click e la posiziono sull'html in corrispondenza delle chats
+// 3. imposto tutte le chat nel css con propietà display none e creo una classe con propieà display flex far apparire l'elemento cliccato
+// 4. genero due condizioni una per dire che per ogni contatto se la propirtà ha valore true passa a false
+// 4.1 la seconda condizione serve per cambiare la propietà visible in base al suo stato solo sull'elemento cliccato
+// 5 genero una propietà dal nome ActiveChat che grazie alla funzione del click le andrò a dare il valore di index così da poter selezionare in maniera dinamica i percorsi e variare le posizioni in base al click
+
+
+
 var app = new Vue (
     {
         el: "#container",
