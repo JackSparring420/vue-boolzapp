@@ -94,7 +94,7 @@
 
                <div class="write">
                     <i class="far fa-smile"></i>
-                    <input type="text" placeholder="Scivi un messaggio">
+                    <input type="text"  v-model="newMessage.text" @keyup.enter="addMessage(activeChat), reply(activeChat)" placeholder="Scivi un messaggio">
                     <i class="fas fa-microphone"></i>
                </div>
            </main>

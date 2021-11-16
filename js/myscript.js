@@ -11,12 +11,29 @@
 // 4.1 la seconda condizione serve per cambiare la propietà visible in base al suo stato solo sull'elemento cliccato
 // 5 genero una propietà dal nome ActiveChat che grazie alla funzione del click le andrò a dare il valore di index così da poter selezionare in maniera dinamica i percorsi e variare le posizioni in base al click
 
+// Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al t hread sopra, come messaggio verde
+// 1. creo un oggetto che mi va a rappresentare il nuovo messaggio
+// 2. inserisco nell'html i collegamenti della funzione al click invio (keyup.enter) e mi prelevo il valore inserito con v-model
+// 3. nella funzione addMessage pusho NewMessage
+// 3.1 inserisco un controllo per non far pushare nel caso non ci sia nessun carattere nella barra di testo
 
+
+// Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’ utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
 
 var app = new Vue (
     {
         el: "#container",
         data:{
+            newMessage: {
+                date: "now",
+                text: "",
+                status: "sent"
+            },
+            auto: {
+                date: "now",
+                text: "ok",
+                status: "received"
+            },
             activeChat: 0,
             contacts: [
                 {
@@ -26,7 +43,7 @@ var app = new Vue (
                     messages: [
                         {
                             date: ' 10/01/2020 1 5:30:55',
-                            text: ' Hai portato a spasso i l cane?',
+                            text: ' Hai portato a spasso il cane?',
                             status: 'sent'
                         },
                         {
@@ -128,7 +145,28 @@ var app = new Vue (
                 };
 
                 this.activeChat = index
+            },
+
+            addMessage(index){
+                if(this.newMessage.text !== ""){
+                   this.contacts[index].messages.push(this.newMessage);
+                        this.newMessage = {
+                            date: "now",
+                            text: "",
+                            status: 'sent'
+                        }; 
+                    };
+                // setTimeout(reply, 1000);
+                // function reply(){
+                //     this.contacts[index].messages.push(this.auto);
+                // }
+            },
+
+            reply(index){
+                this.contacts[index].messages.push(this.auto);
             }
         }
     }
-);
+    );
+    
+    
