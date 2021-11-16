@@ -81,15 +81,14 @@
                     </div>
                 </div>
 
-               <div class="chat" :class="contacts[activeChat].visible === true ? 'done' : '' ">
-                   <div>
+               <div class="chat" :class="contacts[activeChat].visible === true ? 'done-flex' : '' ">
                        <div v-for="message,i in contacts[activeChat].messages" :key="i"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' " >
                             {{message.text}}
+                            <div></div>
                             <p>
                                 {{message.date}}
                             </p>
                        </div>
-                   </div>
                </div>
 
 
