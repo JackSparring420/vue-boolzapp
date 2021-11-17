@@ -26,7 +26,7 @@
 // Ricerca utenti: s crivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti i l cui nome contiene l e l ettere i nserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 // 1.prendo il valore digitato nell'imput con v-model e lo registro in una propietà
 // 2.combino al ciclo for che uso per stamparmi i contatti alla condizione (v-if) per vedere se vengono le lettere scritte sui nomi con quelle riportate nella propietà per il quale ritornerà true solo per gli elementi con una corrispondenza
-// 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con "toLowerCase()" che mette tutti i caratteri in minuscolo
+// 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con ""
 
 let now = new Date().toUTCString();
 console.log(now);
@@ -43,11 +43,13 @@ var app = new Vue (
         data:{
             search: "",
             newMessage: {
+                menuMessage: false,
                 date: "now",
                 text: "",
                 status: "sent",
             },
             reply: {
+                menuMessage: false,
                 date: "now",
                 text: "ok",
                 status: "received"
@@ -55,22 +57,24 @@ var app = new Vue (
             activeChat: 0,
             contacts: [
                 {
-                    menus: false,
                     name: "Michele",
                     avatar: "img/avatar_1.jpg",
                     visible: true,
                     messages: [
                         {
+                            menuMessage: false,
                             date: ' 10/01/2020 1 5:30:55',
                             text: ' Hai portato a spasso il cane?',
                             status: 'sent'
                         },
                         {
+                            menuMessage: false,
                             date: ' 10/01/2020 1 5:50:00',
                             text: ' Ricordati di dargli da mangiare',
                             status: 'sent'
                         },
                         {
+                            menuMessage: false,
                             date: ' 10/01/2020 1 6:15:22',
                             text: ' Tutto fatto!',
                             status: 'received'
@@ -78,22 +82,24 @@ var app = new Vue (
                     ],
                 },
                 {
-                    menus: false,
                     name: "Fabio",
                     avatar: "img/avatar_2.jpg",
                     visible: false,
                     messages: [
                         {
+                            menuMessage: false,
                             date: ' 20/03/2020 1 6:30:00',
                             text: ' Ciao come stai?',
                             status: 'sent'
                         },
                         {
+                            menuMessage: false,
                             date: ' 20/03/2020 1 6:30:55',
                             text: ' Bene grazie! Stasera ci vediamo?',
                             status: 'received'
                         },
                         {
+                            menuMessage: false,
                             date: ' 20/03/2020 1 6:35:00',
                             text: ' Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
@@ -101,22 +107,24 @@ var app = new Vue (
                     ],
                 },
                 {
-                    menus: false,
                     name: "Samuele",
                     avatar: "img/avatar_3.jpg",
                     visible: false,
                     messages: [
                         {
+                            menuMessage: false,
                             date: ' 28/03/2020 1 0:10:40',
                             text: ' La Marianna va in campagna',
                             status: 'received'
                         },
                         {
+                            menuMessage: false,
                             date: ' 28/03/2020 1 0:20:10',
                             text: ' Sicuro di non a ver sbagliato chat?',
                             status: 'sent'
                         },
                         {
+                            menuMessage: false,
                             date: ' 28/03/2020 1 6:15:22',
                             text: ' Ah scusa!',
                             status: 'received'
@@ -124,17 +132,18 @@ var app = new Vue (
                     ],
                 },
                 {
-                    menus: false,
                     name: "Luisa",
                     avatar: "img/avatar_4.jpg",
                     visible: false,
                     messages: [
                         {
+                            menuMessage: false,
                             date: ' 10/01/2020 1 5:30:55',
                             text: ' Lo sai che ha aperto una n uova pizzeria?',
                             status: 'sent'
                         },
                         {
+                            menuMessage: false,
                             date: ' 10/01/2020 1 5:50:00',
                             text: ' Si, ma preferirei andare a l cinema',
                             status: 'received'
@@ -167,36 +176,37 @@ var app = new Vue (
                 if(this.newMessage.text !== ""){
                    this.contacts[index].messages.push(this.newMessage);
                    this.newMessage = {
-                       date: "",
+                       menuMessage: false,
+                       date: "now",
                        text: "",
                        status: 'sent'
                     }; 
                 };
 
-                setTimeout(()=> this.contacts[index].messages.push(this.reply),1000);
+                setTimeout(()=> this.contacts[index].messages.push(this.reply), 1000);
                 
             },
 
-            menu(index){
-                this.contacts.forEach((contact) => {
-                    if(contact.menus === true){
-                        contact.menus = false
+            menuC(index, i){
+                this.contacts[index].messages.forEach((message) => {
+                    if(message.menuMessage === true){
+                        message.menuMessage = false
                     }
                 })
                 
                 
-                if(this.contacts[index].menus === false){
-                    this.contacts[index].menus = true
+                if(this.contacts[index].messages[i].menuMessage === false){
+                    this.contacts[index].messages[i].menuMessage = true
                 } else {
-                    this.contacts[index].menus = false
+                    this.contacts[index].messages[i].menuMessage = false
                 }
 
             },
-            closeMenu(){
+            closeMenu(index){
 
-                this.contacts.forEach((contact) => {
-                    if(contact.menus === true){
-                        contact.menus = false
+                this.contacts[index].messages.forEach((message) => {
+                    if(message.menuMessage === true){
+                        message.menuMessage = false
                     }
                 })
             },
@@ -211,6 +221,5 @@ var app = new Vue (
             }
         },
     }
-    );
-    
+    );  
     

@@ -13,7 +13,7 @@
         <div id="back-up"></div>
         <div id="container">
            <aside>
-               <div id="user" @click="closeMenu">
+               <div id="user" @click="closeMenu(activeChat)">
                    <div class="user-contact">
                        <div class="image">
                            <img src="img/avatar_io.jpg" alt="">
@@ -27,7 +27,7 @@
                    </div>
                </div>
 
-               <div id="notifications-desktop" @click="closeMenu">
+               <div id="notifications-desktop" @click="closeMenu(activeChat)">
                    <div class="bell">
                        <i class="fas fa-bell-slash"></i>
                    </div>
@@ -37,12 +37,12 @@
                     </div>
                </div>
 
-               <div id="search" @click="closeMenu">
+               <div id="search" @click="closeMenu(activeChat)">
                    <span><i class="fas fa-search"></i></span>
                    <input type="text" v-model="search" placeholder="Cerca o inizia una nuoca chat">
                </div>
 
-               <div id="chats" @click="closeMenu">
+               <div id="chats" @click="closeMenu(activeChat)">
                    <div @click="changeChat(i)"  class="contact-chat" v-for="contact, i in contacts"  :key="i" v-if="contact.name.toLowerCase().includes(search.toLowerCase())">
                        <div class="description-contact">
                            <div class="image">
@@ -61,7 +61,7 @@
            </aside>
 
            <main>
-               <div class="header" @click="closeMenu">
+               <div class="header" @click="closeMenu(activeChat)">
                     <div class="contact-text-container" v-for="contact, i in contacts"  :key="i" :class="contact.visible === true ? 'done' : '' ">
                         <div class="contact-text">
                             <div class="image">
@@ -82,16 +82,16 @@
                 </div>
                 <!-- CHAT -->
                <div class="chat" :class="contacts[activeChat].visible === true ? 'done-flex' : '' " >
-                       <div v-for="message,m in contacts[activeChat].messages" :key="m"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' ">
+                       <div v-for="message,i in contacts[activeChat].messages" :key="i"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' ">
                             <div class="menu-mex" >
                                 {{message.text}}
-                                <div class="click-menu-mess" @click="menu(m)">
+                                <div class="click-menu-mess" @click="menuC(activeChat, i)">
                                     <div class="click-menu-mess-hidden"><i class="fas fa-check"></i></div>
                                 </div>
-                                <div class="menu-message" :class="contacts[m].menus === true ? 'done' : '' ">
+                                <div class="menu-message" :class="message.menuMessage === true ? 'done' : '' "> <!-- occhio -->
                                     <ul>
                                         <li>Info messaggio</li>
-                                        <li @click="deleteMessage(activeChat, m)">Cancella messaggio</li>
+                                        <li @click="deleteMessage(activeChat, i)">Cancella messaggio</li>
                                     </ul>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                </div>
 
 
-               <div class="write" @click="closeMenu">
+               <div class="write" @click="closeMenu(activeChat)">
                     <i class="far fa-smile"></i>
                     <input type="text"  v-model="newMessage.text" @keyup.enter="addMessage(activeChat)" placeholder="Scivi un messaggio">
                     <i class="fas fa-microphone"></i>
@@ -113,8 +113,6 @@
     </div>
 
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/plugin/customParseFormat.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="js/myscript.js"></script>
 </body>
