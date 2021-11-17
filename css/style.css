@@ -191,6 +191,8 @@ main {
     background-size: contain;
     display: none;
     flex-direction: column;
+    overflow-x: scroll;
+    /* z-index: 0; */
 }
 
 .write {
@@ -217,25 +219,75 @@ main {
 
 .meggage-chat {
     max-width: 250px;
-    padding: 10px;
+    padding: 10px 20px 10px 10px ;
     border-radius: 5px;
     margin: 10px 30px;
 }
 
 .sent {
     background-color: #dcf7c0;
-    align-self: flex-end;
-    
+    align-self: flex-end; 
 }
 
 .recived {
     background-color: white;
+    align-self: flex-start;
 }
 
 .chat p {
     font-size: 13px;
     margin-top: 3px;
     text-align: end;
+}
+
+.menu-mex {
+    position: relative;
+}
+
+.menu-message{
+    width: 150px;
+    position: absolute;
+    background-color: white;
+    z-index: 20;
+    display: none;
+    box-shadow: black;
+}
+
+.menu-message ul {
+    list-style-type: none;
+}
+
+.menu-message li {
+    list-style-type: none;
+    cursor: pointer;
+    user-select: none;
+    margin: 10px;
+}
+
+.click-menu-mess{
+    position: absolute;
+    width: 15px;
+    height: 35px;
+    /* background-color: aqua; */
+    right: -18px;
+    top: 1px;
+    font-size: 13px;
+    color: gray;
+}
+
+.click-menu-mess-hidden {
+    position: absolute;
+    width: 15px;
+    height: 35px;
+    /* background-color: aqua; */
+    top: 1px;
+    font-size: 13px;
+    color: gray;
+    display: none;
+}
+
+.meggage-chat:hover .click-menu-mess-hidden{
+    display: block;
 }
 
 .done {

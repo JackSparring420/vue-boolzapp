@@ -22,19 +22,30 @@
 // 1. creo un oggetto che mi va a rappresentare il nuovo messaggio
 // 2. inserisco nell'html i collegamenti della funzione al click invio (keyup.enter) e mi prelevo il valore inserito con v-model
 // 3. nella funzione addMessage pusho NewMessage
+
+// Ricerca utenti: s crivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti i l cui nome contiene l e l ettere i nserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
+// 1.prendo il valore digitato nell'imput con v-model e lo registro in una propietà
+// 2.combino al ciclo for che uso per stamparmi i contatti alla condizione (v-if) per vedere se vengono le lettere scritte sui nomi con quelle riportate nella propietà per il quale ritornerà true solo per gli elementi con una corrispondenza
+// 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con "toLowerCase()" che mette tutti i caratteri in minuscolo
+
 let now = new Date().toUTCString();
 console.log(now);
 // dayjs.extend(dayjs_plugin_customParseFormat);
 
+
+
+
+
+
 var app = new Vue (
     {
-        el: "#container",
+        el: "#back",
         data:{
+            search: "",
             newMessage: {
                 date: "now",
                 text: "",
                 status: "sent",
-                search: ""
             },
             reply: {
                 date: "now",
@@ -44,6 +55,7 @@ var app = new Vue (
             activeChat: 0,
             contacts: [
                 {
+                    menus: false,
                     name: "Michele",
                     avatar: "img/avatar_1.jpg",
                     visible: true,
@@ -66,6 +78,7 @@ var app = new Vue (
                     ],
                 },
                 {
+                    menus: false,
                     name: "Fabio",
                     avatar: "img/avatar_2.jpg",
                     visible: false,
@@ -88,6 +101,7 @@ var app = new Vue (
                     ],
                 },
                 {
+                    menus: false,
                     name: "Samuele",
                     avatar: "img/avatar_3.jpg",
                     visible: false,
@@ -110,6 +124,7 @@ var app = new Vue (
                     ],
                 },
                 {
+                    menus: false,
                     name: "Luisa",
                     avatar: "img/avatar_4.jpg",
                     visible: false,
@@ -130,32 +145,20 @@ var app = new Vue (
             ],
         },
        
+        computed: {
+            
+        },
+
         methods: {
             changeChat(index){
                 this.contacts.forEach((contact) => {
                     if(contact.visible === true){
-                        this.contact.visible = false
-                    };
-                });
+                        contact.visible = false
+                    }
+                })
 
-                // if(this.contacts[0].visible === true){
-                //     this.contacts[0].visible = false
-                // };
-                // if(this.contacts[1].visible === true){
-                //     this.contacts[1].visible = false
-                // };
-                // if(this.contacts[2].visible === true){
-                //     this.contacts[2].visible = false
-                // };
-                // if(this.contacts[3].visible === true){
-                //     this.contacts[3].visible = false
-                // };
-
-                if (this.contacts[index].visible !== true){
-                    this.contacts[index].visible = true
-                } else {
-                    this.contacts[index].visible = false
-                };
+                this.contacts[index].visible = true
+                
 
                 this.activeChat = index
             },
@@ -174,11 +177,39 @@ var app = new Vue (
                 
             },
 
-            cerca(){
+            menu(index){
+                this.contacts.forEach((contact) => {
+                    if(contact.menus === true){
+                        contact.menus = false
+                    }
+                })
                 
+                
+                if(this.contacts[index].menus === false){
+                    this.contacts[index].menus = true
+                } else {
+                    this.contacts[index].menus = false
+                }
+
+            },
+            closeMenu(){
+
+                this.contacts.forEach((contact) => {
+                    if(contact.menus === true){
+                        contact.menus = false
+                    }
+                })
+            },
             
+            deleteMessage(index, msg){
+                this.contacts[index].messages.splice(msg, 1)
+                this.contacts.forEach((contact) => {
+                    if(contact.menus === true){
+                        contact.menus = false
+                    }
+                })
             }
-        }
+        },
     }
     );
     
