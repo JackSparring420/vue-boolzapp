@@ -28,11 +28,11 @@
 // 2.combino al ciclo for che uso per stamparmi i contatti alla condizione (v-if) per vedere se vengono le lettere scritte sui nomi con quelle riportate nella propietà per il quale ritornerà true solo per gli elementi con una corrispondenza
 // 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con ""
 
-let now = new Date().toUTCString();
+// var customParseFormat = require('dayjs/plugin/customParseFormat')
+// dayjs.extend(customParseFormat)
+let now = dayjs().format("DD MM YYYY HH:mm:ss")
 console.log(now);
 // dayjs.extend(dayjs_plugin_customParseFormat);
-
-
 
 
 
@@ -44,13 +44,13 @@ var app = new Vue (
             search: "",
             newMessage: {
                 menuMessage: false,
-                date: "now",
+                date: dayjs().format("DD MM YYYY HH:mm:ss"),
                 text: "",
                 status: "sent",
             },
             reply: {
                 menuMessage: false,
-                date: "now",
+                date: dayjs().format("DD MM YYYY HH:mm:ss"),
                 text: "ok",
                 status: "received"
             },
@@ -63,19 +63,19 @@ var app = new Vue (
                     messages: [
                         {
                             menuMessage: false,
-                            date: ' 10/01/2020 1 5:30:55',
-                            text: ' Hai portato a spasso il cane?',
+                            date: dayjs('202001105:30:55').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Hai portato a spasso il cane?',
                             status: 'sent'
                         },
                         {
                             menuMessage: false,
-                            date: ' 10/01/2020 1 5:50:00',
-                            text: ' Ricordati di dargli da mangiare',
+                            date: dayjs('202001105:50:00').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Ricordati di dargli da mangiare',
                             status: 'sent'
                         },
                         {
                             menuMessage: false,
-                            date: ' 10/01/2020 1 6:15:22',
+                            date: dayjs('202001106:15:22').format("DD MM YYYY HH:mm:ss"),
                             text: ' Tutto fatto!',
                             status: 'received'
                         }
@@ -88,20 +88,20 @@ var app = new Vue (
                     messages: [
                         {
                             menuMessage: false,
-                            date: ' 20/03/2020 1 6:30:00',
-                            text: ' Ciao come stai?',
+                            date: dayjs('202003206:30:00').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Ciao come stai?',
                             status: 'sent'
                         },
                         {
                             menuMessage: false,
-                            date: ' 20/03/2020 1 6:30:55',
-                            text: ' Bene grazie! Stasera ci vediamo?',
+                            date: dayjs('202003206:30:55').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Bene grazie! Stasera ci vediamo?',
                             status: 'received'
                         },
                         {
                             menuMessage: false,
-                            date: ' 20/03/2020 1 6:35:00',
-                            text: ' Mi piacerebbe ma devo andare a fare la spesa.',
+                            date: dayjs('202003206:35:00').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Mi piacerebbe ma devo andare a fare la spesa.',
                             status: 'sent'
                         }
                     ],
@@ -113,19 +113,19 @@ var app = new Vue (
                     messages: [
                         {
                             menuMessage: false,
-                            date: ' 28/03/2020 1 0:10:40',
-                            text: ' La Marianna va in campagna',
+                            date: dayjs('202003280:10:40').format("DD MM YYYY HH:mm:ss"),
+                            text: 'La Marianna va in campagna',
                             status: 'received'
                         },
                         {
                             menuMessage: false,
-                            date: ' 28/03/2020 1 0:20:10',
+                            date: dayjs('202003280:20:10').format("DD MM YYYY HH:mm:ss"),
                             text: ' Sicuro di non a ver sbagliato chat?',
                             status: 'sent'
                         },
                         {
                             menuMessage: false,
-                            date: ' 28/03/2020 1 6:15:22',
+                            date: dayjs('202003286:15:22').format("DD MM YYYY HH:mm:ss"),
                             text: ' Ah scusa!',
                             status: 'received'
                         }
@@ -138,14 +138,14 @@ var app = new Vue (
                     messages: [
                         {
                             menuMessage: false,
-                            date: ' 10/01/2020 1 5:30:55',
-                            text: ' Lo sai che ha aperto una n uova pizzeria?',
+                            date: dayjs('202001105:30:55').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Lo sai che ha aperto una n uova pizzeria?',
                             status: 'sent'
                         },
                         {
                             menuMessage: false,
-                            date: ' 10/01/2020 1 5:50:00',
-                            text: ' Si, ma preferirei andare a l cinema',
+                            date: dayjs('202001105:50:00').format("DD MM YYYY HH:mm:ss"),
+                            text: 'Si, ma preferirei andare a l cinema',
                             status: 'received'
                         },
                     ],
@@ -177,13 +177,19 @@ var app = new Vue (
                    this.contacts[index].messages.push(this.newMessage);
                    this.newMessage = {
                        menuMessage: false,
-                       date: "now",
+                       date: dayjs().format("DD MM YYYY HH:mm:ss"),
                        text: "",
                        status: 'sent'
                     }; 
                 };
 
                 setTimeout(()=> this.contacts[index].messages.push(this.reply), 1000);
+                this.reply = {
+                    menuMessage: false,
+                    date: dayjs().format("DD MM YYYY HH:mm:ss"),
+                    text: "ok",
+                    status: "received"
+                }
                 
             },
 
@@ -209,17 +215,18 @@ var app = new Vue (
                         message.menuMessage = false
                     }
                 })
+
             },
             
-            deleteMessage(index, msg){
-                this.contacts[index].messages.splice(msg, 1)
-                this.contacts.forEach((contact) => {
-                    if(contact.menus === true){
-                        contact.menus = false
-                    }
-                })
+            deleteMessage(index, i){
+                this.contacts[index].messages.splice(i, 1)
+            },
+
+            infoMsg(index, i){
+            alert(this.contacts[index].messages[i].date)
             }
         },
+        
     }
     );  
     

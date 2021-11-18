@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <h3>{{contact.name}}</h3>
-                                <p>Ultimo accesso oggi alle {{contact.messages[contact.messages.length - 1].date}}</p>
+                                <p>Ultimo accesso oggi {{contact.messages[contact.messages.length - 1].date}}</p>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="menu-message" :class="message.menuMessage === true ? 'done' : '' "> <!-- occhio -->
                                     <ul>
-                                        <li>Info messaggio</li>
+                                        <li @click="infoMsg(activeChat, i)">Info messaggio</li>
                                         <li @click="deleteMessage(activeChat, i)">Cancella messaggio</li>
                                     </ul>
                                 </div>
@@ -111,7 +111,6 @@
            </main>
         </div>
     </div>
-
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="js/myscript.js"></script>
