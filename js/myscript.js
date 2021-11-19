@@ -26,16 +26,12 @@
 // Ricerca utenti: s crivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti i l cui nome contiene l e l ettere i nserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
 // 1.prendo il valore digitato nell'imput con v-model e lo registro in una propietà
 // 2.combino al ciclo for che uso per stamparmi i contatti alla condizione (v-if) per vedere se vengono le lettere scritte sui nomi con quelle riportate nella propietà per il quale ritornerà true solo per gli elementi con una corrispondenza
-// 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con ""
+// 2.1 onde evitare conflitti fra lettere maiuscole e lettere minuscole confronto tutto con ".toLowerCase()"
 
 // var customParseFormat = require('dayjs/plugin/customParseFormat')
 // dayjs.extend(customParseFormat)
 let now = dayjs().format("DD MM YYYY HH:mm:ss")
 console.log(now);
-// dayjs.extend(dayjs_plugin_customParseFormat);
-
-
-
 
 var app = new Vue (
     {
@@ -120,7 +116,7 @@ var app = new Vue (
                         {
                             menuMessage: false,
                             date: dayjs('202003280:20:10').format("DD MM YYYY HH:mm:ss"),
-                            text: ' Sicuro di non a ver sbagliato chat?',
+                            text: ' Sicuro di non aver sbagliato chat?',
                             status: 'sent'
                         },
                         {
@@ -145,17 +141,13 @@ var app = new Vue (
                         {
                             menuMessage: false,
                             date: dayjs('202001105:50:00').format("DD MM YYYY HH:mm:ss"),
-                            text: 'Si, ma preferirei andare a l cinema',
+                            text: 'Si, ma preferirei andare al cinema',
                             status: 'received'
                         },
                     ],
                 },
 
             ],
-        },
-       
-        computed: {
-            
         },
 
         methods: {
@@ -167,7 +159,6 @@ var app = new Vue (
                 })
 
                 this.contacts[index].visible = true
-                
 
                 this.activeChat = index
             },
@@ -200,22 +191,19 @@ var app = new Vue (
                     }
                 })
                 
-                
-                if(this.contacts[index].messages[i].menuMessage === false){
+                // if(this.contacts[index].messages[i].menuMessage === false){
                     this.contacts[index].messages[i].menuMessage = true
-                } else {
-                    this.contacts[index].messages[i].menuMessage = false
-                }
-
+                // } else {
+                //     this.contacts[index].messages[i].menuMessage = false
+                // }
             },
-            closeMenu(index){
 
+            closeMenu(index){
                 this.contacts[index].messages.forEach((message) => {
                     if(message.menuMessage === true){
                         message.menuMessage = false
                     }
                 })
-
             },
             
             deleteMessage(index, i){
@@ -224,9 +212,10 @@ var app = new Vue (
 
             infoMsg(index, i){
             alert(this.contacts[index].messages[i].date)
-            }
+            console.log(contacts[index].messages.length);
+            },
+
         },
-        
     }
     );  
     
