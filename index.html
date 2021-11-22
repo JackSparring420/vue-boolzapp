@@ -50,10 +50,11 @@
                            </div>
                            <div>
                                <h3>{{contact.name}}</h3>
-                               <p>{{contact.messages[contact.messages.length - 1].text}}</p>
+                               <p v-if="contact.messages.length >= 1">{{contact.messages[contact.messages.length - 1].text}}</p>
+                               <p v-else>nessun messaggio</p>
                            </div>
                        </div>
-                        <div>
+                        <div v-if="contact.messages.length >= 1">
                             {{contact.messages[contact.messages.length - 1].date}}
                         </div>
                    </div>
@@ -69,7 +70,7 @@
                             </div>
                             <div>
                                 <h3>{{contact.name}}</h3>
-                                <p>Ultimo accesso oggi {{contact.messages[contact.messages.length - 1].date}}</p>
+                                <p v-if="contact.messages.length > 0">Ultimo accesso oggi {{contact.messages[contact.messages.length - 1].date}}</p>
                             </div>
                         </div>
                     </div>
@@ -81,7 +82,7 @@
                 </div>
                 <!-- CHAT -->
                <div class="chat" :class="contacts[activeChat].visible === true ? 'done-flex' : '' " >
-                   <div v-for="message,i in contacts[activeChat].messages" :key="i"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' " v-if="contacts[activeChat].messages.length >= 1" >
+                   <div v-for="message,i in contacts[activeChat].messages" :key="i"  class="meggage-chat " :class="message.status === 'sent' ? 'sent' : 'recived' " >
                        <div class="menu-mex">
                            {{message.text}}
                            <div class="click-menu-mess" @click="menuC(activeChat, i)">
